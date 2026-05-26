@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kreactiva — Impulsando el Futuro Empresarial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --black:#05050A;--dark:#0D0D1A;--card:#12122A;--border:#1E1E3A;
+      --purple:#6C3EF4;--purple2:#8B5CF6;--gold:#F5C518;--gold2:#FFD700;
+      --gold3:#C9960C;--text:#EEE8FF;--muted:#7A7A9A;--white:#FFFFFF;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+    #particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .particle{position:absolute;border-radius:50%;animation:float linear infinite;opacity:0}
+    @keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:0.6}90%{opacity:0.3}100%{transform:translateY(-10vh) scale(1);opacity:0}}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 5%;background:rgba(5,5,10,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(108,62,244,0.2)}
+    .nav-logo{display:flex;align-items:center;gap:10px;font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;font-style:italic;background:linear-gradient(90deg,var(--gold2),var(--gold3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .nav-logo img{height:42px;width:auto;-webkit-text-fill-color:initial}
+    .nav-links{display:flex;gap:32px;list-style:none}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;transition:color 0.2s}
+    .nav-links a:hover{color:var(--gold)}
+    .nav-cta{padding:10px 24px;border-radius:6px;background:linear-gradient(135deg,var(--purple),var(--purple2));color:white;text-decoration:none;font-size:0.82rem;font-weight:600;box-shadow:0 0 20px rgba(108,62,244,0.3);transition:all 0.25s}
+    .nav-cta:hover{box-shadow:0 0 30px rgba(108,62,244,0.6);transform:translateY(-1px)}
+    #inicio{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;padding:120px 5% 80px;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(108,62,244,0.15) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 80% 20%,rgba(245,197,24,0.07) 0%,transparent 60%)}
+    .hero-grid{position:absolute;inset:0;z-index:0;background-image:linear-gradient(rgba(108,62,244,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(108,62,244,0.06) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%)}
+    .hero-content{position:relative;z-index:1;text-align:center;max-width:860px;animation:heroIn 1s ease both}
+    @keyframes heroIn{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:20px;border:1px solid rgba(245,197,24,0.3);background:rgba(245,197,24,0.05);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--gold);margin-bottom:28px}
+    .hero-badge span{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+    .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,5.5rem);font-weight:700;line-height:1.05;margin-bottom:24px}
+    .hero-title .gold{background:linear-gradient(90deg,var(--gold2) 0%,var(--gold) 50%,var(--gold3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .hero-title .purple{color:var(--purple2)}
+    .hero-sub{font-size:1.1rem;color:var(--muted);line-height:1.8;max-width:600px;margin:0 auto 44px}
+    .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+    .btn-primary{padding:14px 32px;border-radius:8px;background:linear-gradient(135deg,var(--gold3),var(--gold2),var(--gold));color:#05050A;font-weight:700;font-size:0.9rem;text-decoration:none;border:none;cursor:pointer;transition:all 0.25s;box-shadow:0 0 30px rgba(245,197,24,0.3)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(245,197,24,0.5)}
+    .btn-secondary{padding:14px 32px;border-radius:8px;border:1px solid rgba(108,62,244,0.5);background:rgba(108,62,244,0.1);color:var(--purple2);font-weight:600;font-size:0.9rem;text-decoration:none;transition:all 0.25s}
+    .hero-stats{display:flex;justify-content:center;gap:48px;margin-top:64px;flex-wrap:wrap}
+    .stat{text-align:center}
+    .stat-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;background:linear-gradient(90deg,var(--gold2),var(--gold3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .stat-label{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-top:4px}
+    section{position:relative;z-index:1;padding:100px 5%}
+    .section-tag{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.25em;color:var(--gold);margin-bottom:14px;display:block}
+    .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.15;margin-bottom:20px}
+    .section-sub{color:var(--muted);line-height:1.8;max-width:580px;font-size:0.95rem}
+    .divider{width:60px;height:3px;margin:24px 0;background:linear-gradient(90deg,var(--purple),var(--gold));border-radius:2px}
+    #quienes{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .quienes-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1100px;margin:0 auto}
+    .quienes-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;position:relative;overflow:hidden}
+    .quienes-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--gold))}
+    .quienes-card .k-big{font-family:'Cormorant Garamond',serif;font-size:8rem;font-weight:700;font-style:italic;background:linear-gradient(135deg,var(--purple) 0%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:16px}
+    .quienes-card p{color:var(--muted);font-size:0.88rem;line-height:1.8}
+    .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
+    .mv-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px}
+    .mv-card h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;margin-bottom:12px}
+    .mv-card.mision h4{color:var(--gold)}.mv-card.vision h4{color:var(--purple2)}
+    .mv-card p{color:var(--muted);font-size:0.82rem;line-height:1.75}
+    .servicios-header{text-align:center;margin-bottom:60px}
+    .servicios-header .divider{margin:24px auto}
+    .servicios-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+    .servicio-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px 32px;position:relative;overflow:hidden;transition:all 0.3s}
+    .servicio-card:hover{transform:translateY(-6px);border-color:rgba(108,62,244,0.4)}
+    .s-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:24px;background:linear-gradient(135deg,rgba(108,62,244,0.2),rgba(245,197,24,0.1));border:1px solid rgba(108,62,244,0.3)}
+    .servicio-card h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:700;margin-bottom:12px;color:var(--white)}
+    .servicio-card p{color:var(--muted);font-size:0.84rem;line-height:1.75}
+    .s-tag{display:inline-block;margin-top:20px;padding:4px 12px;border-radius:20px;font-size:0.68rem;text-transform:uppercase;letter-spacing:0.1em;background:rgba(245,197,24,0.1);color:var(--gold);border:1px solid rgba(245,197,24,0.2)}
+    #agente{background:var(--dark);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .agente-wrap{max-width:900px;margin:0 auto}
+    .agente-header{text-align:center;margin-bottom:40px}
+    .chat-container{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 0 60px rgba(108,62,244,0.15)}
+    .chat-header{padding:18px 24px;background:linear-gradient(90deg,rgba(108,62,244,0.3),rgba(245,197,24,0.1));border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+    .chat-avatar{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--purple),var(--gold3));display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+    .chat-info h4{font-size:0.9rem;font-weight:600;color:var(--white)}
+    .chat-info p{font-size:0.7rem;color:var(--gold)}
+    .chat-dot{width:8px;height:8px;border-radius:50%;background:#22C55E;margin-left:auto;box-shadow:0 0 8px #22C55E;animation:blink 2s infinite}
+    #chatMessages{height:380px;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:16px;scroll-behavior:smooth}
+    #chatMessages::-webkit-scrollbar{width:4px}
+    #chatMessages::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+    .chat-msg{display:flex;gap:10px;animation:msgIn 0.3s ease}
+    @keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+    .chat-msg.user{flex-direction:row-reverse}
+    .msg-av{width:32px;height:32px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700}
+    .chat-msg.bot .msg-av{background:linear-gradient(135deg,var(--purple),var(--gold3));color:white}
+    .chat-msg.user .msg-av{background:rgba(245,197,24,0.15);border:1px solid var(--gold3);color:var(--gold)}
+    .msg-bubble{padding:12px 16px;border-radius:12px;font-size:0.84rem;line-height:1.7;max-width:75%}
+    .chat-msg.bot .msg-bubble{background:rgba(108,62,244,0.15);border:1px solid rgba(108,62,244,0.2);border-bottom-left-radius:3px;color:var(--text)}
+    .chat-msg.user .msg-bubble{background:rgba(245,197,24,0.1);border:1px solid rgba(245,197,24,0.2);border-bottom-right-radius:3px;color:var(--text)}
+    .typing-dots{display:flex;gap:4px;align-items:center;padding:4px 0}
+    .typing-dots span{width:6px;height:6px;border-radius:50%;background:var(--purple2);opacity:0.5;animation:tdot 1.2s ease-in-out infinite}
+    .typing-dots span:nth-child(2){animation-delay:0.2s}.typing-dots span:nth-child(3){animation-delay:0.4s}
+    @keyframes tdot{0%,60%,100%{transform:translateY(0);opacity:0.5}30%{transform:translateY(-6px);opacity:1}}
+    .chat-input-area{padding:16px 20px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:flex-end}
+    .chat-suggestions{padding:0 20px 14px;display:flex;flex-wrap:wrap;gap:8px}
+    .suggestion-chip{padding:6px 14px;border-radius:20px;font-size:0.72rem;border:1px solid rgba(108,62,244,0.3);background:rgba(108,62,244,0.08);color:var(--purple2);cursor:pointer;transition:all 0.2s}
+    .suggestion-chip:hover{background:rgba(108,62,244,0.2);border-color:var(--purple2)}
+    #chatInput{flex:1;background:var(--dark);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.84rem;outline:none;resize:none;min-height:42px;max-height:100px;transition:border-color 0.2s}
+    #chatInput:focus{border-color:rgba(108,62,244,0.5)}
+    #chatInput::placeholder{color:var(--muted)}
+    #chatSend{width:42px;height:42px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--purple),var(--gold3));color:white;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0}
+    #chatSend:disabled{opacity:0.3;cursor:not-allowed}
+    .agenda-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+    .agenda-top{padding:40px;background:linear-gradient(135deg,rgba(108,62,244,0.15),rgba(245,197,24,0.05));border-bottom:1px solid var(--border)}
+    .agenda-top h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;margin-bottom:8px;color:var(--white)}
+    .agenda-top p{color:var(--muted);font-size:0.88rem}
+    .agenda-form{padding:40px;display:grid;gap:20px}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .form-group{display:flex;flex-direction:column;gap:8px}
+    .form-group label{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted)}
+    .form-group input,.form-group select,.form-group textarea{background:var(--dark);border:1px solid var(--border);border-radius:10px;padding:12px 16px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:rgba(108,62,244,0.5)}
+    .form-group select option{background:var(--dark)}
+    .form-group textarea{resize:none;min-height:80px}
+    .calendar-wrap{background:var(--dark);border:1px solid var(--border);border-radius:12px;padding:20px}
+    .cal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+    .cal-header h4{font-size:0.9rem;font-weight:600;color:var(--white)}
+    .cal-nav{display:flex;gap:8px}
+    .cal-nav button{background:rgba(108,62,244,0.2);border:1px solid rgba(108,62,244,0.3);color:var(--purple2);border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:0.8rem;transition:all 0.2s}
+    .cal-days-header{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px}
+    .cal-days-header span{font-size:0.65rem;text-align:center;color:var(--muted);text-transform:uppercase}
+    .cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+    .cal-day{aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.78rem;cursor:pointer;transition:all 0.15s;background:transparent;border:1px solid transparent;color:var(--text)}
+    .cal-day:hover:not(.empty):not(.past){background:rgba(108,62,244,0.2);border-color:rgba(108,62,244,0.4)}
+    .cal-day.selected{background:linear-gradient(135deg,var(--purple),var(--gold3));color:white}
+    .cal-day.today{border-color:var(--gold3);color:var(--gold)}
+    .cal-day.empty,.cal-day.past{opacity:0.25;cursor:not-allowed}
+    .time-slots{margin-top:16px}
+    .time-slots h5{font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px}
+    .slots-grid{display:flex;flex-wrap:wrap;gap:8px}
+    .time-slot{padding:6px 14px;border-radius:6px;font-size:0.78rem;border:1px solid rgba(108,62,244,0.3);background:rgba(108,62,244,0.08);color:var(--purple2);cursor:pointer;transition:all 0.2s}
+    .time-slot:hover,.time-slot.selected{background:rgba(108,62,244,0.25);border-color:var(--purple2);color:white}
+    .btn-agendar{width:100%;padding:16px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--purple),var(--gold3));color:white;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all 0.25s;box-shadow:0 0 30px rgba(108,62,244,0.3)}
+    #contacto{background:var(--dark);border-top:1px solid var(--border)}
+    .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1000px;margin:0 auto}
+    .contacto-info h2{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;margin-bottom:20px}
+    .contacto-info p{color:var(--muted);line-height:1.8;margin-bottom:36px;font-size:0.9rem}
+    .contact-items{display:flex;flex-direction:column;gap:20px}
+    .contact-item{display:flex;gap:16px;align-items:flex-start}
+    .contact-icon{width:44px;height:44px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;background:rgba(108,62,244,0.15);border:1px solid rgba(108,62,244,0.3)}
+    .contact-item h4{font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold);margin-bottom:4px}
+    .contact-item p,.contact-item a{color:var(--muted);font-size:0.88rem;text-decoration:none}
+    .contact-item a:hover{color:var(--gold)}
+    .social-links{display:flex;gap:12px;margin-top:32px}
+    .social-btn{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:var(--card);color:var(--muted);text-decoration:none;font-size:1.1rem;transition:all 0.2s}
+    .social-btn:hover{border-color:var(--purple2);color:var(--purple2)}
+    .contacto-form-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:36px;position:relative;overflow:hidden}
+    .contacto-form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--gold))}
+    .contacto-form-card h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;margin-bottom:24px;color:var(--white)}
+    .contacto-form{display:flex;flex-direction:column;gap:16px}
+    .btn-enviar{padding:14px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--gold3),var(--gold2));color:#05050A;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;transition:all 0.25s}
+    footer{border-top:1px solid var(--border);padding:40px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+    .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;font-style:italic;background:linear-gradient(90deg,var(--gold2),var(--gold3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    footer p{color:var(--muted);font-size:0.78rem}
+    .footer-links{display:flex;gap:24px}
+    .footer-links a{color:var(--muted);text-decoration:none;font-size:0.78rem;transition:color 0.2s}
+    .footer-links a:hover{color:var(--gold)}
+    .wa-float{position:fixed;bottom:28px;right:28px;z-index:999;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.4);text-decoration:none;font-size:1.6rem;animation:waFloat 3s ease-in-out infinite}
+    @keyframes waFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    @media(max-width:768px){.nav-links{display:none}.quienes-grid,.contacto-grid,.form-row{grid-template-columns:1fr;gap:32px}.mv-grid{grid-template-columns:1fr}.hero-stats{gap:28px}footer{flex-direction:column;text-align:center}}
+  </style>
+</head>
+<body>
+<div id="particles"></div>
+<a href="https://wa.me/5215534686978" target="_blank" class="wa-float">💬</a>
+<nav>
+  <div class="nav-logo"><span>Kreactiva</span></div>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#quienes">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#agente">Asistente IA</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#agenda" class="nav-cta">Agendar Cita</a>
+</nav>
+<section id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div style="margin-bottom:24px;"><img src="logo.png" alt="Kreactiva" style="height:150px;width:auto;filter:drop-shadow(0 0 40px rgba(108,62,244,0.6));"></div>
+    <div class="hero-badge"><span></span> Firma Empresarial Multilínea · CDMX</div>
+    <h1 class="hero-title"><span class="gold">Impulsando</span><br/>el <span class="purple">Futuro</span><br/>Empresarial</h1>
+    <p class="hero-sub">Conectamos capital inteligente con talento operativo. Transformamos ideas en negocios escalables y rentables.</p>
+    <div class="hero-btns">
+      <a href="#agenda" class="btn-primary">Agendar Videollamada</a>
+      <a href="#servicios" class="btn-secondary">Conocer Servicios</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Líneas de Negocio</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">República Mexicana</div></div>
+      <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Posibilidades</div></div>
+    </div>
+  </div>
+</section>
+<section id="quienes">
+  <div class="quienes-grid">
+    <div class="quienes-visual">
+      <div class="quienes-card">
+        <div class="k-big">K</div>
+        <p>Somos una firma empresarial multilínea con sede en la Ciudad de México, con alcance en toda la república. Nacimos con una misión clara: democratizar el acceso al capital, al marketing y a la tecnología para las PyMEs mexicanas.</p>
+        <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;">
+          <span style="padding:6px 14px;border-radius:20px;font-size:0.7rem;background:rgba(108,62,244,0.15);border:1px solid rgba(108,62,244,0.3);color:var(--purple2);">Capital Inteligente</span>
+          <span style="padding:6px 14px;border-radius:20px;font-size:0.7rem;background:rgba(245,197,24,0.1);border:1px solid rgba(245,197,24,0.2);color:var(--gold);">Tecnología</span>
+          <span style="padding:6px 14px;border-radius:20px;font-size:0.7rem;background:rgba(108,62,244,0.15);border:1px solid rgba(108,62,244,0.3);color:var(--purple2);">Ecosistema Integral</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="section-tag">// Quiénes Somos</span>
+      <h2 class="section-title">Una firma que <span style="color:var(--gold)">transforma</span> negocios</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Somos el puente entre el capital y las oportunidades. Combinamos inversión, marketing, tecnología e incubación para llevar cada negocio al siguiente nivel.</p>
+      <div class="mv-grid">
+        <div class="mv-card mision">
+          <h4>🎯 Misión</h4>
+          <p>Impulsar el crecimiento de las PyMEs a través de un ecosistema integral que combina incubación, financiamiento, marketing digital e inversión de alto rendimiento.</p>
+        </div>
+        <div class="mv-card vision">
+          <h4>🚀 Visión</h4>
+          <p>Ser la firma empresarial multilínea líder en la región, reconocida por conectar el capital inteligente con el talento operativo en todo México.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="servicios" style="max-width:1200px;margin:0 auto;padding:100px 5%;">
+  <div class="servicios-header">
+    <span class="section-tag">// Nuestras Líneas de Negocio</span>
+    <h2 class="section-title">Todo lo que tu empresa necesita</h2>
+    <div class="divider"></div>
+    <p class="section-sub" style="margin:0 auto;">Cinco líneas de negocio diseñadas para cubrir cada etapa del crecimiento empresarial.</p>
+  </div>
+  <div class="servicios-grid">
+    <div class="servicio-card">
+      <div class="s-icon">💼</div>
+      <h3>Inversión a Proyectos</h3>
+      <p>Inyectamos capital estratégico a proyectos con potencial de crecimiento. Analizamos cada oportunidad y acompañamos el desarrollo desde la inversión hasta la consolidación.</p>
+      <span class="s-tag">Capital + Estrategia</span>
+    </div>
+    <div class="servicio-card">
+      <div class="s-icon">📣</div>
+      <h3>Agencia de Marketing</h3>
+      <p>Modelo único: nosotros ponemos el capital de marketing y tú nos das un porcentaje de tus ventas. Sin costo inicial para ti. Estrategias digitales de vanguardia con resultados medibles.</p>
+      <span class="s-tag">Sin inversión inicial</span>
+    </div>
+    <div class="servicio-card">
+      <div class="s-icon">🌱</div>
+      <h3>Incubación de Negocios</h3>
+      <p>Tienes la idea, nosotros la trabajamos contigo. Desde la validación del modelo hasta el lanzamiento al mercado. Acompañamiento integral para emprendedores con visión.</p>
+      <span class="s-tag">De idea a empresa</span>
+    </div>
+    <div class="servicio-card">
+      <div class="s-icon">📈</div>
+      <h3>Inversiones con Rentabilidad</h3>
+      <p>Haz crecer tu dinero con nosotros. Ofrecemos oportunidades de inversión de alto rendimiento con transparencia total. Tu capital trabaja mientras tú descansas.</p>
+      <span class="s-tag">Alto rendimiento</span>
+    </div>
+    <div class="servicio-card">
+      <div class="s-icon">💻</div>
+      <h3>Desarrollo de Software</h3>
+      <p>Soluciones tecnológicas a la medida para negocios y empresas. Desde sistemas de gestión hasta plataformas digitales. Tecnología que impulsa tu operación y escala contigo.</p>
+      <span class="s-tag">Tecnología a medida</span>
+    </div>
+  </div>
+</section>
+<section id="agente">
+  <div class="agente-wrap">
+    <div class="agente-header">
+      <span class="section-tag">// Asistente Inteligente</span>
+      <h2 class="section-title">¿Tienes dudas? <span style="color:var(--gold)">Pregúntale a nuestra IA</span></h2>
+      <div class="divider" style="margin:20px auto;"></div>
+      <p class="section-sub" style="margin:0 auto;">Nuestro asistente conoce todo sobre Kreactiva y puede ayudarte a encontrar la línea de negocio ideal para ti.</p>
+    </div>
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-info">
+          <h4>Asistente Kreactiva</h4>
+          <p>Powered by IA · Respuesta inmediata</p>
+        </div>
+        <div class="chat-dot"></div>
+      </div>
+      <div id="chatMessages">
+        <div class="chat-msg bot">
+          <div class="msg-av">K</div>
+          <div class="msg-bubble">¡Hola! Soy el asistente de <strong>Kreactiva</strong> 👋 Estoy aquí para resolver todas tus dudas sobre nuestras líneas de negocio. ¿En qué puedo ayudarte hoy?</div>
+        </div>
+      </div>
+      <div class="chat-suggestions">
+        <button class="suggestion-chip" onclick="useChip(this)">¿Cómo funciona el marketing?</button>
+        <button class="suggestion-chip" onclick="useChip(this)">Quiero invertir mi dinero</button>
+        <button class="suggestion-chip" onclick="useChip(this)">Tengo una idea de negocio</button>
+        <button class="suggestion-chip" onclick="useChip(this)">¿Qué es la incubación?</button>
+      </div>
+      <div class="chat-input-area">
+        <textarea id="chatInput" rows="1" placeholder="Escribe tu pregunta sobre Kreactiva..."></textarea>
+        <button id="chatSend" onclick="sendChat()">➤</button>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="agenda" style="padding:100px 5%;">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span class="section-tag">// Agenda tu Videollamada</span>
+      <h2 class="section-title">Hablemos de tu <span style="color:var(--gold)">proyecto</span></h2>
+      <div class="divider" style="margin:20px auto;"></div>
+      <p class="section-sub" style="margin:0 auto;">Selecciona el día y hora que mejor te convenga. Te confirmaremos por WhatsApp de inmediato.</p>
+    </div>
+    <div class="agenda-card">
+      <div class="agenda-top">
+        <h3>📅 Videollamada de Diagnóstico</h3>
+        <p>30 minutos · Gratuita · Toda la república · Vía Google Meet o Zoom</p>
+      </div>
+      <div class="agenda-form">
+        <div class="form-row">
+          <div class="form-group"><label>Nombre completo *</label><input type="text" id="ag-nombre" placeholder="Tu nombre"/></div>
+          <div class="form-group"><label>WhatsApp *</label><input type="tel" id="ag-tel" placeholder="55 1234 5678"/></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Email</label><input type="email" id="ag-email" placeholder="tu@correo.com"/></div>
+          <div class="form-group"><label>Línea de interés *</label>
+            <select id="ag-linea">
+              <option value="">Selecciona...</option>
+              <option>Inversión a Proyectos</option>
+              <option>Agencia de Marketing</option>
+              <option>Incubación de Negocios</option>
+              <option>Invertir mi Dinero</option>
+              <option>Desarrollo de Software</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Selecciona el día *</label>
+          <div class="calendar-wrap">
+            <div class="cal-header">
+              <h4 id="calMonthYear"></h4>
+              <div class="cal-nav">
+                <button onclick="changeMonth(-1)">‹</button>
+                <button onclick="changeMonth(1)">›</button>
+              </div>
+            </div>
+            <div class="cal-days-header">
+              <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+            </div>
+            <div class="cal-days" id="calDays"></div>
+            <div class="time-slots" id="timeSlots" style="display:none;">
+              <h5>Horarios disponibles</h5>
+              <div class="slots-grid">
+                <button class="time-slot" onclick="selectTime(this)">10:00 AM</button>
+                <button class="time-slot" onclick="selectTime(this)">11:00 AM</button>
+                <button class="time-slot" onclick="selectTime(this)">12:00 PM</button>
+                <button class="time-slot" onclick="selectTime(this)">4:00 PM</button>
+                <button class="time-slot" onclick="selectTime(this)">5:00 PM</button>
+                <button class="time-slot" onclick="selectTime(this)">6:00 PM</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group"><label>¿Cuéntanos brevemente tu situación?</label><textarea id="ag-mensaje" placeholder="Describe tu negocio o idea..."></textarea></div>
+        <button class="btn-agendar" onclick="agendar()">📅 Confirmar Cita y Enviar a WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="contacto">
+  <div class="contacto-grid">
+    <div class="contacto-info">
+      <span class="section-tag">// Contacto</span>
+      <h2 class="section-title">Estamos en <span style="color:var(--gold)">toda la república</span></h2>
+      <div class="divider"></div>
+      <p>Nuestra base está en la Ciudad de México, pero operamos en todo el país. Contáctanos por el canal que prefieras.</p>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div><h4>Ubicación</h4><p>Ciudad de México · Toda la República Mexicana</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <div><h4>WhatsApp</h4><p><a href="https://wa.me/5215534686978">+52 55 3468 6978</a></p></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📘</div>
+          <div><h4>Facebook</h4><p><a href="https://facebook.com/Kreactiva" target="_blank">facebook.com/Kreactiva</a></p></div>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="https://wa.me/5215534686978" class="social-btn" target="_blank">💬</a>
+        <a href="https://facebook.com/Kreactiva" class="social-btn" target="_blank">📘</a>
+      </div>
+    </div>
+    <div class="contacto-form-card">
+      <h3>Solicita más información</h3>
+      <div class="contacto-form">
+        <div class="form-group"><label>Nombre</label><input type="text" id="c-nombre" placeholder="Tu nombre completo"/></div>
+        <div class="form-group"><label>WhatsApp / Teléfono</label><input type="tel" id="c-tel" placeholder="55 1234 5678"/></div>
+        <div class="form-group"><label>¿En qué te podemos ayudar?</label>
+          <select id="c-interes">
+            <option value="">Selecciona una opción...</option>
+            <option>Inversión a Proyectos</option>
+            <option>Agencia de Marketing</option>
+            <option>Incubación de Negocios</option>
+            <option>Invertir mi Dinero</option>
+            <option>Desarrollo de Software</option>
+            <option>Información General</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Mensaje</label><textarea id="c-mensaje" placeholder="Cuéntanos sobre tu proyecto..."></textarea></div>
+        <button class="btn-enviar" onclick="enviarContacto()">Enviar por WhatsApp →</button>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="footer-logo">Kreactiva</div>
+  <p>© 2025 Kreactiva · Impulsando el Futuro Empresarial · CDMX, México</p>
+  <div class="footer-links">
+    <a href="#inicio">Inicio</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#agenda">Agendar</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</footer>
+<script>
+  const pContainer=document.getElementById('particles');
+  for(let i=0;i<25;i++){const p=document.createElement('div');p.className='particle';const size=Math.random()*4+2;const isGold=Math.random()>0.5;p.style.cssText=`width:${size}px;height:${size}px;left:${Math.random()*100}%;background:${isGold?'#F5C518':'#6C3EF4'};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;`;pContainer.appendChild(p)}
+
+  let currentDate=new Date(),selectedDay=null,selectedTime=null;
+  function renderCalendar(){
+    const months=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    document.getElementById('calMonthYear').textContent=`${months[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+    const daysEl=document.getElementById('calDays');daysEl.innerHTML='';
+    const today=new Date();
+    const firstDay=new Date(currentDate.getFullYear(),currentDate.getMonth(),1).getDay();
+    const daysInMonth=new Date(currentDate.getFullYear(),currentDate.getMonth()+1,0).getDate();
+    for(let i=0;i<firstDay;i++){const e=document.createElement('div');e.className='cal-day empty';daysEl.appendChild(e)}
+    for(let d=1;d<=daysInMonth;d++){
+      const btn=document.createElement('div');btn.className='cal-day';btn.textContent=d;
+      const thisDate=new Date(currentDate.getFullYear(),currentDate.getMonth(),d);
+      if(thisDate<today&&thisDate.toDateString()!==today.toDateString()){btn.classList.add('past')}
+      else{if(thisDate.toDateString()===today.toDateString())btn.classList.add('today');btn.onclick=()=>selectDay(btn,d)}
+      daysEl.appendChild(btn)
+    }
+  }
+  function selectDay(btn,day){
+    document.querySelectorAll('.cal-day').forEach(d=>d.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedDay=`${day} de ${['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'][currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+    document.getElementById('timeSlots').style.display='block';
+    document.querySelectorAll('.time-slot').forEach(s=>s.classList.remove('selected'));
+    selectedTime=null;
+  }
+  function selectTime(btn){document.querySelectorAll('.time-slot').forEach(s=>s.classList.remove('selected'));btn.classList.add('selected');selectedTime=btn.textContent}
+  function changeMonth(dir){currentDate.setMonth(currentDate.getMonth()+dir);renderCalendar()}
+  renderCalendar();
+
+  function agendar(){
+    const nombre=document.getElementById('ag-nombre').value.trim();
+    const tel=document.getElementById('ag-tel').value.trim();
+    const email=document.getElementById('ag-email').value.trim();
+    const linea=document.getElementById('ag-linea').value;
+    const mensaje=document.getElementById('ag-mensaje').value.trim();
+    if(!nombre||!tel||!linea||!selectedDay||!selectedTime){alert('Por favor completa: nombre, WhatsApp, línea de interés, día y hora.');return}
+    const txt=`🗓️ *NUEVA CITA KREACTIVA*\n\n👤 *Nombre:* ${nombre}\n📱 *WhatsApp:* ${tel}\n${email?'📧 *Email:* '+email+'\n':''}💼 *Interés:* ${linea}\n📅 *Día:* ${selectedDay}\n🕐 *Hora:* ${selectedTime}${mensaje?'\n\n💬 *Mensaje:* '+mensaje:''}\n\n_Enviado desde kreactiva.com_`;
+    window.open(`https://wa.me/5215534686978?text=${encodeURIComponent(txt)}`,'_blank');
+  }
+
+  function enviarContacto(){
+    const nombre=document.getElementById('c-nombre').value.trim();
+    const tel=document.getElementById('c-tel').value.trim();
+    const interes=document.getElementById('c-interes').value;
+    const mensaje=document.getElementById('c-mensaje').value.trim();
+    if(!nombre||!tel){alert('Por favor ingresa tu nombre y WhatsApp.');return}
+    const txt=`📩 *SOLICITUD DE INFORMACIÓN*\n\n👤 *Nombre:* ${nombre}\n📱 *Contacto:* ${tel}\n${interes?'💼 *Interés:* '+interes+'\n':''}${mensaje?'\n💬 *Mensaje:* '+mensaje:''}\n\n_Enviado desde kreactiva.com_`;
+    window.open(`https://wa.me/5215534686978?text=${encodeURIComponent(txt)}`,'_blank');
+  }
+
+  const chatMessages=document.getElementById('chatMessages');
+  const chatInput=document.getElementById('chatInput');
+  const chatSend=document.getElementById('chatSend');
+  const chatHistory=[];
+  const SYSTEM_PROMPT='Eres el asistente virtual de Kreactiva, una firma empresarial multilínea con sede en CDMX que opera en toda la república mexicana. Líneas de negocio: 1) Inversión a Proyectos, 2) Agencia de Marketing (nosotros ponemos el capital, cliente paga % de ventas), 3) Incubación de Negocios, 4) Inversiones con Rentabilidad, 5) Desarrollo de Software. WhatsApp: +52 55 3468 6978. Responde en español, amigable y profesional.';
+
+  chatInput.addEventListener('input',()=>{chatInput.style.height='auto';chatInput.style.height=Math.min(chatInput.scrollHeight,100)+'px'});
+  chatInput.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendChat()}});
+  function useChip(el){chatInput.value=el.textContent;sendChat()}
+
+  function addChatMsg(role,text){
+    const d=document.createElement('div');d.className=`chat-msg ${role==='user'?'user':'bot'}`;
+    d.innerHTML=`<div class="msg-av">${role==='user'?'YO':'K'}</div><div class="msg-bubble">${text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br/>')}</div>`;
+    chatMessages.appendChild(d);chatMessages.scrollTop=chatMessages.scrollHeight;
+  }
+  function showTyping(){const d=document.createElement('div');d.className='chat-msg bot';d.id='typing';d.innerHTML='<div class="msg-av">K</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>';chatMessages.appendChild(d);chatMessages.scrollTop=chatMessages.scrollHeight}
+  function removeTyping(){const t=document.getElementById('typing');if(t)t.remove()}
+
+  async function sendChat(){
+    const text=chatInput.value.trim();
+    if(!text||chatSend.disabled)return;
+    chatInput.value='';chatInput.style.height='auto';
+    chatSend.disabled=true;
+    addChatMsg('user',text);
+    chatHistory.push({role:'user',content:text});
+    showTyping();
+    try{
+      const res=await fetch('http://localhost:5000/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:chatHistory,system:SYSTEM_PROMPT})});
+      const data=await res.json();removeTyping();
+      if(data.reply){chatHistory.push({role:'assistant',content:data.reply});addChatMsg('bot',data.reply)}
+    }catch(err){removeTyping();addChatMsg('bot','En este momento no puedo conectarme. Contáctanos por WhatsApp al +52 55 3468 6978 📱')}
+    chatSend.disabled=false;chatMessages.scrollTop=chatMessages.scrollHeight;
+  }
+</script>
+</body>
+</html>
